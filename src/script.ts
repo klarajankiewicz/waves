@@ -27,13 +27,14 @@ function draw() {
   let now = Date.now();
   let delta = (now - then) / 5000;
   ticker += delta;
+  
   then = now;
 
   ctx.lineWidth = 1;
   ctx.fillRect(0, 0, w, h);
   let zoom = 100;
-  let strength = 10; //szerokość fali//
-  let strengthY = strength * 3; //wysokość fali//
+  let strength = 10; //szerokość fali
+  let strengthY = strength * 3; //wysokość fali
   for (let y = -strength; y < h + strength; y += 3) {
     ctx.beginPath();
     ctx.strokeStyle = `hsla(${y * 0.6 + ticker * 50}, 100%, 50%, 0.3)`;

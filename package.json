@@ -1,16 +1,18 @@
 {
+  "homepage": "https://tomaszwincenty.github.io/waves",
   "name": "waves",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "parcel serve ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "Tomasz Nowak",
   "license": "ISC",
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "parcel": "^2.0.0-beta.2",
     "typescript": "^4.2.4"
   },
