@@ -445,10 +445,10 @@ id) /*: string*/
 var _simplexNoise = require("simplex-noise");
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 var _simplexNoiseDefault = _parcelHelpers.interopDefault(_simplexNoise);
-const BACKGROUND_COLOR = "#0a031d";
-const WAVES_DENSITY = 7;
-const ZOOM = 200;
-const STRENGTH = 10;
+// const BACKGROUND_COLOR = "#0a031d";
+const WAVES_DENSITY = 8;
+const ZOOM = 150;
+const STRENGTH = 15;
 let canvas;
 let ctx;
 let simplex;
@@ -456,17 +456,30 @@ let w;
 let h;
 let ticker = 0;
 let then = 0;
+let backgroundGradient;
+let wavesGradient;
 function setup() {
   canvas = document.querySelector("#canvas");
   ctx = canvas.getContext("2d");
   window.addEventListener("resize", reset);
   reset();
 }
+const setGradients = () => {
+  backgroundGradient = ctx.createLinearGradient(0, 0, w, w * 0.75);
+  backgroundGradient.addColorStop(0, "#fee55a");
+  backgroundGradient.addColorStop(0.5, "#ebcedf");
+  backgroundGradient.addColorStop(1, "#89d2f6");
+  wavesGradient = ctx.createLinearGradient(100, 0, w, w * 0.5);
+  wavesGradient.addColorStop(0, "#0030b9");
+  wavesGradient.addColorStop(0.5, "#b700ff");
+  wavesGradient.addColorStop(1, "#d4111b");
+  ctx.fillStyle = backgroundGradient;
+};
 function reset() {
   simplex = new _simplexNoiseDefault.default();
   w = canvas.width = window.innerWidth * 1;
   h = canvas.height = window.innerHeight * 1;
-  ctx.fillStyle = BACKGROUND_COLOR;
+  setGradients();
 }
 function draw() {
   requestAnimationFrame(draw);
@@ -474,12 +487,12 @@ function draw() {
   let delta = (now - then) / 5000;
   ticker += delta;
   then = now;
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 2;
   ctx.fillRect(0, 0, w, h);
   let strengthY = STRENGTH * 3;
   for (let y = -STRENGTH; y < h + STRENGTH; y += WAVES_DENSITY) {
     ctx.beginPath();
-    ctx.strokeStyle = `hsla(${y * 0.6 + ticker * 50}, 100%, 50%, 0.3)`;
+    ctx.strokeStyle = wavesGradient;
     for (let x = -STRENGTH; x < w + STRENGTH; x += 3) {
       let n1 = simplex.noise3D(x / ZOOM, y / ZOOM, ticker) * STRENGTH;
       let n2 = simplex.noise3D(x / ZOOM + 1000, y / ZOOM + 1000, ticker) * strengthY;
