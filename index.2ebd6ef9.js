@@ -465,15 +465,14 @@ function setup() {
   reset();
 }
 const setGradients = () => {
-  backgroundGradient = ctx.createLinearGradient(0, 0, w, w * 0.75);
+  backgroundGradient = ctx.createLinearGradient(0, 0, w, w * 0.5);
   backgroundGradient.addColorStop(0, "#fee55a");
   backgroundGradient.addColorStop(0.5, "#ebcedf");
   backgroundGradient.addColorStop(1, "#89d2f6");
-  wavesGradient = ctx.createLinearGradient(100, 0, w, w * 0.5);
-  wavesGradient.addColorStop(0, "#0030b9");
-  wavesGradient.addColorStop(0.5, "#b700ff");
+  wavesGradient = ctx.createLinearGradient(0, 0, w * 0.8, w);
+  wavesGradient.addColorStop(0, "#5584c4");
+  wavesGradient.addColorStop(0.5, "#2d2666");
   wavesGradient.addColorStop(1, "#d4111b");
-  ctx.fillStyle = backgroundGradient;
 };
 function reset() {
   simplex = new _simplexNoiseDefault.default();
@@ -481,14 +480,25 @@ function reset() {
   h = canvas.height = window.innerHeight * 1;
   setGradients();
 }
+function drawCircle(color) {
+  ctx.beginPath();
+  ctx.arc(300, 575, 100, 0, 2 * Math.PI);
+  // ctx.strokeStyle = "red";
+  // ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.closePath();
+}
 function draw() {
   requestAnimationFrame(draw);
   let now = Date.now();
-  let delta = (now - then) / 5000;
+  let delta = (now - then) / 1500;
   ticker += delta;
   then = now;
+  ctx.fillStyle = backgroundGradient;
   ctx.lineWidth = 2;
   ctx.fillRect(0, 0, w, h);
+  drawCircle("red");
   let strengthY = STRENGTH * 3;
   for (let y = -STRENGTH; y < h + STRENGTH; y += WAVES_DENSITY) {
     ctx.beginPath();
@@ -499,6 +509,7 @@ function draw() {
       ctx.lineTo(x + n1, y + n2);
     }
     ctx.stroke();
+    ctx.closePath();
   }
 }
 setup();
