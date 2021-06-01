@@ -140,9 +140,9 @@
       this[globalName] = mainExports;
     }
   }
-})({"1AUpZ":[function(require,module,exports) {
+})({"3nr4A":[function(require,module,exports) {
 var HMR_HOST = null;
-var HMR_PORT = 1234;
+var HMR_PORT = 58692;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d751713988987e9331980363e24189ce";
 module.bundle.HMR_BUNDLE_ID = "4779f229e37f00f4c9edf68b2ebd6ef9";
@@ -466,9 +466,9 @@ function setup() {
 }
 const setGradients = () => {
   backgroundGradient = ctx.createLinearGradient(0, 0, w, w * 0.5);
-  backgroundGradient.addColorStop(0, "#fee55a");
-  backgroundGradient.addColorStop(0.5, "#ebcedf");
-  backgroundGradient.addColorStop(1, "#89d2f6");
+  backgroundGradient.addColorStop(0, "#a6c8ff");
+  backgroundGradient.addColorStop(0.5, "#535cbc");
+  backgroundGradient.addColorStop(1, "#4a0031");
   wavesGradient = ctx.createLinearGradient(0, 0, w * 0.8, w);
   wavesGradient.addColorStop(0, "#5584c4");
   wavesGradient.addColorStop(0.5, "#2d2666");
@@ -482,9 +482,14 @@ function reset() {
 }
 function drawCircle(color) {
   ctx.beginPath();
-  ctx.arc(300, 575, 100, 0, 2 * Math.PI);
-  // ctx.strokeStyle = "red";
-  // ctx.stroke();
+  ctx.arc(250, 275, 150, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.closePath();
+}
+function drawSecondCircle(color) {
+  ctx.beginPath();
+  ctx.arc(1200, 575, 60, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
   ctx.closePath();
@@ -498,7 +503,7 @@ function draw() {
   ctx.fillStyle = backgroundGradient;
   ctx.lineWidth = 2;
   ctx.fillRect(0, 0, w, h);
-  drawCircle("red");
+  drawCircle("#a4bcff");
   let strengthY = STRENGTH * 3;
   for (let y = -STRENGTH; y < h + STRENGTH; y += WAVES_DENSITY) {
     ctx.beginPath();
@@ -510,6 +515,7 @@ function draw() {
     }
     ctx.stroke();
     ctx.closePath();
+    drawSecondCircle("#f22c2c");
   }
 }
 setup();
@@ -1022,6 +1028,6 @@ exports.export = function (dest, destName, get) {
     get: get
   });
 };
-},{}]},["1AUpZ","2nskz"], "2nskz", "parcelRequireb79b")
+},{}]},["3nr4A","2nskz"], "2nskz", "parcelRequireb79b")
 
 //# sourceMappingURL=index.2ebd6ef9.js.map
