@@ -24,9 +24,9 @@ function setup() {
 
 const setGradients = () => {
   backgroundGradient = ctx.createLinearGradient(0, 0, w, w * 0.5);
-  backgroundGradient.addColorStop(0, "#fee55a");
-  backgroundGradient.addColorStop(0.5, "#ebcedf");
-  backgroundGradient.addColorStop(1, "#89d2f6");
+  backgroundGradient.addColorStop(0, "#a6c8ff");
+  backgroundGradient.addColorStop(0.5, "#535cbc");
+  backgroundGradient.addColorStop(1, "#4a0031");
   wavesGradient = ctx.createLinearGradient(0, 0, w * 0.8, w);
   wavesGradient.addColorStop(0, "#5584c4");
   wavesGradient.addColorStop(0.5, "#2d2666");
@@ -39,11 +39,17 @@ function reset() {
   h = canvas.height = window.innerHeight * 1;
   setGradients()
 }
-function drawCircle(color:string) {
+function drawCircle(color: string) {
   ctx.beginPath();
-  ctx.arc(300, 575, 100, 0, 2 * Math.PI);
-  // ctx.strokeStyle = "red";
-  // ctx.stroke();
+  ctx.arc(250, 275, 150, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill()
+  ctx.closePath();
+}
+
+function drawSecondCircle(color: string) {
+  ctx.beginPath();
+  ctx.arc(1200, 575, 60, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill()
   ctx.closePath();
@@ -61,7 +67,7 @@ function draw() {
 
   ctx.lineWidth = 2;
   ctx.fillRect(0, 0, w, h);
-  drawCircle("red");
+  drawCircle("#a4bcff");
   let strengthY = STRENGTH * 3;
   for (let y = -STRENGTH; y < h + STRENGTH; y += WAVES_DENSITY) {
     ctx.beginPath();
@@ -75,16 +81,10 @@ function draw() {
     ctx.stroke();
     ctx.closePath();
 
+    drawSecondCircle ("#f22c2c");
+
+
   }
-
-  // ctx.beginPath();
-  // ctx.arc(300, 575, 100, 0, 2 * Math.PI);
-  // // ctx.strokeStyle = "red";
-  // // ctx.stroke();
-  // ctx.fillStyle = "#e5e1ca";
-  // ctx.fill()
-  // ctx.closePath();
-
 
 
 }
